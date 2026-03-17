@@ -562,6 +562,15 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 0.05em;
   }
 
+  .founder-image {
+    width: 240px;
+    height: 300px;
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: 0 8px 24px rgba(30, 64, 175, 0.15);
+  }
+
   .founder-info h3 {
     font-size: 1.75rem;
     font-weight: 700;
@@ -724,7 +733,109 @@ import Layout from '../layouts/Layout.astro';
     font-size: 0.8rem;
   }
 
-  /* ===== Section 3: Contact ===== */
+  /* ===== Section 3: Team ===== */
+  .team-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    margin: 0 -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .team-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .team-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .team-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .team-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .team-role {
+    color: #1e40af;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .team-description {
+    margin-bottom: 1.5rem;
+  }
+
+  .team-description p {
+    color: #4b5563;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .team-link {
+    display: inline-block;
+    color: #1e40af;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
+  }
+
+  .team-link:hover {
+    color: #1d4ed8;
+  }
+
+  .team-philosophy {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  .team-philosophy h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .team-philosophy p {
+    color: #4b5563;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .team-philosophy p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ===== Section 4: Contact ===== */
   .contact-section {
     padding: 4rem 0 3rem;
   }
@@ -859,8 +970,22 @@ import Layout from '../layouts/Layout.astro';
       height: 220px;
     }
 
+    .founder-image {
+      width: 180px;
+      height: 220px;
+    }
+
     .photo-initials {
       font-size: 2.5rem;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .team-card {
+      padding: 2rem;
     }
 
     .founder-links,
