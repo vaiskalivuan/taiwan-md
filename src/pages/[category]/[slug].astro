@@ -70,6 +70,7 @@ export async function getStaticPaths() {
 }
 
 import Layout from '../../layouts/Layout.astro';
+import { marked } from 'marked';
 
 const { title, description, content, frontmatter, lang } = Astro.props;
 const { category, slug } = Astro.params;
@@ -135,32 +136,19 @@ try {
   console.log(`Error loading related articles for ${category}:`, err.message);
 }
 
-// 處理 Markdown 內容以支援基本 HTML 渲染
-function processMarkdown(markdownContent: string) {
-  return markdownContent
-    // 處理 [[wikilinks]] → bold text (articles don't need internal links)
-    .replace(/\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]/g, (_, target, display) => `**${display || target}**`)
-    // 處理標題
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    // 處理粗體和斜體
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    // 處理連結
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-    // 處理引用區塊
-    .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-    // 處理段落
-    .replace(/^(?!<[h1-6]|<blockquote|<ul|<ol|<li)(.+)$/gm, '<p>$1</p>')
-    // 處理清單
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-    // 清理多餘的空行
-    .replace(/\n\s*\n/g, '\n');
+// Convert [[wikilinks]] to bold text before marked parsing
+function resolveWikilinks(markdownContent: string): string {
+  if (!markdownContent) return markdownContent;
+  // Process [[Page|Display Text]] or [[Page]] → **text** (articles don't need internal links)
+  return markdownContent.replace(/\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]/g, (_, target, display) => {
+    const label = display || target;
+    return `**${label}**`;
+  });
 }
 
-const processedContent = processMarkdown(content);
+// Process markdown content with marked
+const resolvedContent = resolveWikilinks(content);
+const processedContent = marked.parse(resolvedContent);
 ---
 
 <Layout 
