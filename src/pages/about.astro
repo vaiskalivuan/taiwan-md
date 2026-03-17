@@ -322,6 +322,70 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
 
+    <!-- Section: Sponsors -->
+    <section class="sponsors-section">
+      <div class="sponsors-inner">
+        <h2>🤝 贊助與合作夥伴</h2>
+        <p class="sponsors-desc">
+          Taiwan.md 是非營利的社群開源專案。我們的營運仰賴贊助者的支持。<br>
+          您的 Logo 將出現在網站、GitHub README 和所有公開場合。
+        </p>
+
+        <div class="sponsor-tiers">
+          <div class="tier">
+            <h3 class="tier-name gold">🥇 Gold Sponsor</h3>
+            <p class="tier-desc">首頁 + About 頁大 Logo、README 專區、社群媒體致謝</p>
+            <div class="tier-logos">
+              <div class="logo-placeholder">Your Logo Here</div>
+            </div>
+          </div>
+
+          <div class="tier">
+            <h3 class="tier-name silver">🥈 Silver Sponsor</h3>
+            <p class="tier-desc">About 頁 Logo、README 致謝</p>
+            <div class="tier-logos">
+              <div class="logo-placeholder">Your Logo Here</div>
+            </div>
+          </div>
+
+          <div class="tier">
+            <h3 class="tier-name bronze">🥉 Bronze Sponsor</h3>
+            <p class="tier-desc">About 頁文字致謝、README 列名</p>
+            <div class="tier-logos">
+              <div class="logo-placeholder sm">Your Name Here</div>
+            </div>
+          </div>
+
+          <div class="tier">
+            <h3 class="tier-name community">💚 Community Supporter</h3>
+            <p class="tier-desc">個人贊助者，README 感謝名單</p>
+          </div>
+        </div>
+
+        <div class="sponsor-cta">
+          <h3>想成為贊助者？</h3>
+          <p>
+            無論是企業或個人，我們都歡迎您的支持。贊助方案可依需求客製化。
+          </p>
+          <div class="sponsor-contact">
+            <a href="mailto:cheyu.wu@monoame.com?subject=Taiwan.md 贊助合作詢問" class="btn btn-primary">
+              📧 聯繫我們洽談贊助
+            </a>
+            <a href="https://github.com/sponsors/frank890417" target="_blank" class="btn btn-outline">
+              💖 GitHub Sponsors
+            </a>
+          </div>
+          <p class="sponsor-note">
+            參考案例：<a href="https://coscup.org" target="_blank">COSCUP</a>、
+            <a href="https://mopcon.org" target="_blank">MOPCON</a>、
+            <a href="https://sitcon.org" target="_blank">SITCON</a>、
+            <a href="https://g0v.tw" target="_blank">g0v</a> 
+            等台灣技術社群的贊助模式
+          </p>
+        </div>
+      </div>
+    </section>
+
   </div>
 </Layout>
 
@@ -1037,6 +1101,9 @@ import Layout from '../layouts/Layout.astro';
       flex-direction: column;
       align-items: center;
     }
+    .sponsor-tiers { gap: 1.5rem; }
+    .tier-logos { grid-template-columns: 1fr; }
+    .sponsor-contact { flex-direction: column; align-items: center; }
 
     .vision-block {
       padding: 1.75rem;
@@ -1075,5 +1142,51 @@ import Layout from '../layouts/Layout.astro';
     .timeline-item {
       padding-left: 1rem;
     }
+  }
+
+  /* ===== Sponsors ===== */
+  .sponsors-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #fef9f0, #fdf4e8);
+  }
+  .sponsors-inner { max-width: 900px; margin: 0 auto; }
+  .sponsors-inner h2 { text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .sponsors-desc { text-align: center; color: #64748b; margin-bottom: 2.5rem; line-height: 1.7; }
+  .sponsor-tiers { display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem; }
+  .tier {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+  }
+  .tier-name { margin-bottom: 0.25rem; font-size: 1.1rem; }
+  .tier-name.gold { color: #b45309; }
+  .tier-name.silver { color: #64748b; }
+  .tier-name.bronze { color: #92400e; }
+  .tier-name.community { color: #15803d; }
+  .tier-desc { font-size: 0.85rem; color: #64748b; margin-bottom: 1rem; }
+  .tier-logos { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .logo-placeholder {
+    padding: 1.25rem 1.5rem;
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  .logo-placeholder.sm { padding: 0.75rem 1rem; }
+  .sponsor-cta {
+    text-align: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+  }
+  .sponsor-cta h3 { margin-bottom: 0.5rem; }
+  .sponsor-cta p { color: #475569; margin-bottom: 1rem; font-size: 0.95rem; }
+  .sponsor-contact { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .sponsor-note { font-size: 0.8rem; color: #94a3b8; margin-top: 1rem; }
+  .sponsor-note a { color: #3b82f6; }
   }
 </style>
