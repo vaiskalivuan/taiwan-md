@@ -179,6 +179,16 @@
       "contributions": [
         "content"
       ]
+    },
+    {
+      "login": "howieyoung",
+      "name": "Howie Young",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12218074?v=4",
+      "profile": "https://github.com/howieyoung",
+      "contributions": [
+        "code",
+        "security"
+      ]
     }
   ]
 }
