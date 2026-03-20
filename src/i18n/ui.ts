@@ -10,6 +10,15 @@ export const showDefaultLang = false;
 
 export const ui = {
   en: {
+    'nav.aria-home': 'Taiwan.md Home',
+    'nav.aria-img-label': 'Taiwan.md logo',
+    'nav.aria-toggle-menu': 'Toggle navigation menu',
+    'nav.aria-main-navigation': 'Main navigation',
+    'nav.aria-mobile-navigation': 'Mobile navigation',
+    'nav.aria-search': 'Search',
+    'nav.aria-language-selection': 'Language selection',
+    'nav.aria-switch-to-zh-tw': 'Switch to Traditional Chinese',
+    'nav.aria-switch-to-en': 'Switch to English',
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.twitter': 'Twitter',
@@ -79,6 +88,15 @@ export const ui = {
     'CategoryGrid.explore': 'explore',
   },
   'zh-TW': {
+    'nav.aria-home': 'Taiwan.md 首頁',
+    'nav.aria-img-label': 'Taiwan.md 標誌圖示',
+    'nav.aria-toggle-menu': '開啟/關閉導航選單',
+    'nav.aria-main-navigation': '主要導航',
+    'nav.aria-mobile-navigation': '行動裝置導航',
+    'nav.aria-search': '搜尋',
+    'nav.aria-language-selection': '語言選擇',
+    'nav.aria-switch-to-zh-tw': '切換至繁體中文',
+    'nav.aria-switch-to-en': '切換至英文',
     'nav.home': '首頁',
     'nav.about': '關於',
     'nav.twitter': '推特',
