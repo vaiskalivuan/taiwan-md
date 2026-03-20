@@ -1,8 +1,8 @@
 {
-  "totalArticles": 703,
+  "totalArticles": 707,
   "totalCategories": 20,
-  "estimatedContributors": 47,
-  "totalTags": 1643,
+  "estimatedContributors": 48,
+  "totalTags": 1651,
   "categories": [
     {
       "name": "en",
@@ -14,7 +14,7 @@
     },
     {
       "name": "Culture",
-      "count": 24
+      "count": 27
     },
     {
       "name": "Society",
@@ -34,7 +34,7 @@
     },
     {
       "name": "Food",
-      "count": 28
+      "count": 29
     },
     {
       "name": "Technology",
@@ -168,8 +168,8 @@
     }
   ],
   "languageDistribution": {
-    "zh-TW": 703,
+    "zh-TW": 707,
     "en": 0
   },
-  "lastUpdated": "2026-03-20T16:05:47.731Z"
+  "lastUpdated": "2026-03-20T16:15:41.998Z"
 }
