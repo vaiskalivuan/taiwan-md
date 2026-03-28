@@ -73,7 +73,7 @@ layer1() {
 }
 
 # ════════════════════════════════════════
-# Layer 2 — 品質閘門（inline hollow 偵測）
+# Layer 2 — 品質閘門（inline quality-scan 偵測）
 # ════════════════════════════════════════
 layer2() {
   local f="$1"
@@ -83,44 +83,44 @@ layer2() {
   local body; body=$(awk '/^---$/{n++; next} n>=2{print}' "$f" 2>/dev/null)
   local tl; tl=$(echo "$body" | wc -l | tr -d ' \n'); tl=${tl:-0}
 
-  # hollow: bullet 密度
+  # quality: bullet 密度
   local bl; bl=$(echo "$body" | grep -c '^- \*\*' 2>/dev/null || echo "0"); bl=${bl//[^0-9]/}; bl=${bl:-0}
   (( tl > 5 && bl * 100 / tl > 30 )) && ((hs+=2))
 
-  # hollow: 缺年份
+  # quality: 缺年份
   local yr; yr=$(echo "$body" | grep -oE '\b(19|20)[0-9]{2}\b' 2>/dev/null | wc -l | tr -d ' \n'); yr=${yr//[^0-9]/}; yr=${yr:-0}
   (( yr < 3 )) && ((hs++))
 
-  # hollow: 缺來源
+  # quality: 缺來源
   echo "$body" | grep -q 'http' 2>/dev/null || ((hs++))
 
-  # hollow: 空洞修飾詞
+  # quality: 空洞修飾詞
   local hw; hw=$(echo "$body" | grep -cE '不可或缺|深遠的影響|重要的角色|不可忽視|舉足輕重|密不可分|息息相關|獨樹一幟|博大精深' 2>/dev/null || echo "0"); hw=${hw//[^0-9]/}; hw=${hw:-0}
   (( hw >= 3 )) && ((hs++))
 
-  # hollow: 散文行太少
+  # quality: 散文行太少
   local pr; pr=$(echo "$body" | grep -cvE '^#|^$|^-|^\*|^>|^\|' 2>/dev/null || echo "0"); pr=${pr//[^0-9]/}; pr=${pr:-0}
   (( pr < 10 )) && ((hs++))
 
-  # hollow: 塑膠句式
+  # quality: 塑膠句式
   local pl; pl=$(echo "$body" | grep -cE '不是.*而是|不僅是.*更是|從.*到.*從.*到|展現了.*也體現了' 2>/dev/null || echo "0"); pl=${pl//[^0-9]/}; pl=${pl:-0}
   (( pl >= 1 )) && ((hs++))
 
-  # hollow: 破折號濫用
+  # quality: 破折號濫用
   local ds; ds=$(echo "$body" | grep -o '——' 2>/dev/null | wc -l | tr -d ' \n'); ds=${ds//[^0-9]/}; ds=${ds:-0}
   (( ds > 4 )) && ((hs++))
 
-  # hollow: 教科書開場
+  # quality: 教科書開場
   echo "$body" | head -1 | grep -qE '^(台灣的|作為台灣|在台灣的)' 2>/dev/null && ((hs++))
 
-  # hollow: 總之結尾
+  # quality: 總之結尾
   echo "$body" | tail -5 | grep -qE '總之|展望未來|綜上所述' 2>/dev/null && ((hs++))
 
-  # hollow 結果
+  # quality 結果
   local hs_label=""
-  if (( hs <= 5 )); then hs_label="✅ hollow $hs"
-  elif (( hs <= 7 )); then hs_label="🟡 hollow $hs"; wrn+=("hollow 偏高")
-  else hs_label="🔴 hollow $hs"; echo "$hs_label"; return 1
+  if (( hs <= 5 )); then hs_label="✅ quality $hs"
+  elif (( hs <= 7 )); then hs_label="🟡 quality $hs"; wrn+=("quality 偏高")
+  else hs_label="🔴 quality $hs"; echo "$hs_label"; return 1
   fi
 
   # 字數

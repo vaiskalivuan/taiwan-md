@@ -55,10 +55,10 @@ Check:
 - [ ] `lastHumanReview` — set to `true` if human-reviewed
 - [ ] `lastVerified` — date of last fact-check
 
-### 3. Content quality check (detect-ai-hollow)
+### 3. Content quality check (quality-scan)
 
 ```bash
-cd "$(git rev-parse --show-toplevel)" && bash tools/detect-ai-hollow.sh "knowledge/<Category>/<filename>.md"
+cd "$(git rev-parse --show-toplevel)" && bash tools/quality-scan.sh "knowledge/<Category>/<filename>.md"
 ```
 
 Scores articles 0-10 for AI-generated "hollow" content. Score > 4 = needs rewrite.

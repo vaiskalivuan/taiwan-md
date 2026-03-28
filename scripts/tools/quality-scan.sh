@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
-# detect-ai-hollow.sh v2.0 — 偵測疑似 AI 空洞模板的文章
-# 用法: bash tools/detect-ai-hollow.sh [--fix] [--json] [--diff] [--sort]
+# quality-scan.sh v3.0 — 偵測疑似 AI 空洞模板的文章
+# 用法: bash tools/quality-scan.sh [--fix] [--json] [--diff] [--sort]
 #
-# v2.0 新增:
+# v3.0 新增:
 #   - 塑膠句式偵測（EDITORIAL v3 五品種）
 #   - 結構品質偵測（教科書開場 + 總之結尾 + 萬用 H2）
 #   - 差分模式（--diff：與上次結果比較，只報變化）
 #   - 排序模式（--sort：按分數高→低輸出）
+#   - LIST-DUMP：後半段清單堆砌偵測
+#   - THIN：段落內容稀薄偵測
+#   - QUALITY-DECAY：前後半品質衰退偵測
 #
 # 評分標準 (每項 0-N 分，越高越可疑):
 #   1. bullet 密度：「- **」行數 / 總行數 > 30%
@@ -21,6 +24,9 @@
 #   9. 🆕 教科書開場（「台灣的X是...」「X是台灣...」）
 #  10. 🆕 總之/展望結尾
 #  11. 🆕 萬用 H2 模板（歷史/現況/未來展望）
+#  12. 🆕 LIST-DUMP：後半段清單堆砌（>40% bullet 且 > 前段 2 倍）
+#  13. 🆕 THIN：稀薄段落（H2 區塊內散文行 < 3）
+#  14. 🆕 QUALITY-DECAY：前後半品質衰退（後段散文比例 < 前段 70%）
 
 set -uo pipefail
 cd "$(dirname "$0")/.."
@@ -32,7 +38,7 @@ DIM='\033[0;90m'
 CYN='\033[0;36m'
 RST='\033[0m'
 
-BASELINE_FILE="tools/.hollow-baseline.json"
+BASELINE_FILE="tools/.quality-baseline.json"
 
 JSON_MODE=false
 FIX_MODE=false
@@ -254,6 +260,105 @@ scan_file() {
     reasons="${reasons}萬用H2×${template_h2} "
   fi
 
+  # ── 12. LIST-DUMP（後半段清單堆砌）──
+  local split_line=$(( lines * 6 / 10 ))
+  local front_bullet=0
+  local back_bullet=0
+  local front_total=0
+  local back_total=0
+  local line_num=0
+  while IFS= read -r line; do
+    line_num=$((line_num + 1))
+    [[ -z "$line" ]] && continue
+    if [[ $line_num -le $split_line ]]; then
+      front_total=$((front_total + 1))
+      [[ "$line" =~ ^-\  || "$line" =~ ^\*\  || "$line" =~ ^[0-9]+\. ]] && front_bullet=$((front_bullet + 1))
+    else
+      back_total=$((back_total + 1))
+      [[ "$line" =~ ^-\  || "$line" =~ ^\*\  || "$line" =~ ^[0-9]+\. ]] && back_bullet=$((back_bullet + 1))
+    fi
+  done < "$f"
+  local front_ratio=0
+  local back_ratio=0
+  [[ $front_total -gt 0 ]] && front_ratio=$((front_bullet * 100 / front_total))
+  [[ $back_total -gt 0 ]] && back_ratio=$((back_bullet * 100 / back_total))
+  if [[ $back_ratio -gt 40 ]] && [[ $front_total -gt 0 ]] && [[ $back_ratio -gt $((front_ratio * 2)) ]]; then
+    score=$((score + 3))
+    reasons="${reasons}後段清單堆砌${back_ratio}% "
+  elif [[ $back_ratio -gt 30 ]]; then
+    score=$((score + 2))
+    reasons="${reasons}後段清單堆砌${back_ratio}% "
+  fi
+
+  # ── 13. THIN（段落內容稀薄）──
+  local thin_count=0
+  local current_h2=""
+  local prose_in_block=0
+  local in_block=false
+  while IFS= read -r line; do
+    if [[ "$line" =~ ^##\  ]]; then
+      # Evaluate previous block
+      if [[ "$in_block" == true ]] && [[ $prose_in_block -lt 3 ]]; then
+        thin_count=$((thin_count + 1))
+      fi
+      current_h2="$line"
+      in_block=true
+      prose_in_block=0
+    elif [[ "$in_block" == true ]]; then
+      # Count prose lines (not bullet/table/empty/heading)
+      if [[ -n "$line" ]] && ! [[ "$line" =~ ^(#|-|\*|\||>) ]] && ! [[ "$line" =~ ^[0-9]+\. ]]; then
+        prose_in_block=$((prose_in_block + 1))
+      fi
+    fi
+  done < "$f"
+  # Check last block
+  if [[ "$in_block" == true ]] && [[ $prose_in_block -lt 3 ]]; then
+    thin_count=$((thin_count + 1))
+  fi
+  if [[ $thin_count -ge 2 ]]; then
+    score=$((score + 2))
+    reasons="${reasons}稀薄段落×${thin_count} "
+  elif [[ $thin_count -ge 1 ]]; then
+    score=$((score + 1))
+    reasons="${reasons}稀薄段落×${thin_count} "
+  fi
+
+  # ── 14. QUALITY-DECAY（前後半品質衰退）──
+  local front_prose=0
+  local back_prose=0
+  local front_all=0
+  local back_all=0
+  line_num=0
+  while IFS= read -r line; do
+    line_num=$((line_num + 1))
+    if [[ $line_num -le $split_line ]]; then
+      front_all=$((front_all + 1))
+      if [[ -n "$line" ]] && ! [[ "$line" =~ ^(#|-|\*|\||>) ]] && ! [[ "$line" =~ ^[0-9]+\. ]]; then
+        front_prose=$((front_prose + 1))
+      fi
+    else
+      back_all=$((back_all + 1))
+      if [[ -n "$line" ]] && ! [[ "$line" =~ ^(#|-|\*|\||>) ]] && ! [[ "$line" =~ ^[0-9]+\. ]]; then
+        back_prose=$((back_prose + 1))
+      fi
+    fi
+  done < "$f"
+  local front_prose_ratio=0
+  local back_prose_ratio=0
+  [[ $front_all -gt 0 ]] && front_prose_ratio=$((front_prose * 100 / front_all))
+  [[ $back_all -gt 0 ]] && back_prose_ratio=$((back_prose * 100 / back_all))
+  if [[ $front_prose_ratio -gt 0 ]]; then
+    local decay_threshold_50=$(( front_prose_ratio / 2 ))
+    local decay_threshold_70=$(( front_prose_ratio * 7 / 10 ))
+    if [[ $back_prose_ratio -lt $decay_threshold_50 ]]; then
+      score=$((score + 3))
+      reasons="${reasons}品質衰退前${front_prose_ratio}%後${back_prose_ratio}% "
+    elif [[ $back_prose_ratio -lt $decay_threshold_70 ]]; then
+      score=$((score + 1))
+      reasons="${reasons}品質衰退前${front_prose_ratio}%後${back_prose_ratio}% "
+    fi
+  fi
+
   TOTAL=$((TOTAL + 1))
 
   # 分級: 0-3 OK, 4-7 ⚠️ 可疑, 8+ 🔴 高度可疑
@@ -269,12 +374,12 @@ scan_file() {
 echo ""
 if [[ "$JSON_MODE" == false ]]; then
   if [[ -n "$SINGLE_FILE" ]]; then
-    echo "🔍 detect-ai-hollow v2.0 — 掃描單一檔案: $SINGLE_FILE"
+    echo "🔍 quality-scan v3.0 — 掃描單一檔案: $SINGLE_FILE"
   else
-    echo "🔍 detect-ai-hollow v2.0 — 掃描 src/content/zh-TW/"
+    echo "🔍 quality-scan v3.0 — 掃描 src/content/zh-TW/"
   fi
   echo "   評分: 0-3 ✅ OK | 4-7 ⚠️ 可疑 | 8+ 🔴 高度可疑"
-  echo "   維度: 原7項 + 塑膠句式 + 結構品質（開場/結尾/H2）"
+  echo "   維度: 原11項 + LIST-DUMP + THIN + QUALITY-DECAY"
   echo ""
 fi
 
@@ -414,7 +519,7 @@ fi
 # ── JSON output ──
 if [[ "$JSON_MODE" == true ]]; then
   echo "{"
-  echo "  \"version\": \"2.0\","
+  echo "  \"version\": \"3.0\","
   echo "  \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\","
   echo "  \"total\": $TOTAL,"
   echo "  \"flagged\": $SUSPECT,"
@@ -435,7 +540,7 @@ fi
 # ── Save baseline (always, for diff mode next time) ──
 {
   echo "{"
-  echo "  \"version\": \"2.0\","
+  echo "  \"version\": \"3.0\","
   echo "  \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\","
   echo "  \"total\": $TOTAL,"
   echo "  \"flagged\": $SUSPECT,"

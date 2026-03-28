@@ -72,7 +72,7 @@ for i, a in enumerate(good[:10], 1):
 cd cli && node src/index.js validate <slug>
 
 # 2. AI 空洞句式掃描
-bash scripts/tools/detect-ai-hollow.sh knowledge/<Category>/<slug>.md
+bash scripts/tools/quality-scan.sh knowledge/<Category>/<slug>.md
 ```
 
 ### 人工判斷矩陣
@@ -80,7 +80,7 @@ bash scripts/tools/detect-ai-hollow.sh knowledge/<Category>/<slug>.md
 | 指標              | 合格標準                     | 檢查方式                      |
 | ----------------- | ---------------------------- | ----------------------------- |
 | **validate 分數** | ≥ 80/100                     | CLI `taiwanmd validate`       |
-| **AI 空洞句數**   | ≤ 3 句                       | `detect-ai-hollow.sh`         |
+| **AI 空洞句數**   | ≤ 3 句                       | `quality-scan.sh`             |
 | **文章更新時間**  | lastVerified 在 90 天內      | 讀 frontmatter `lastVerified` |
 | **有場景/人物**   | 前 30 行出現具體人名         | 手動讀前 30 行                |
 | **有數字落差**    | 至少 1 組可用的數字對比      | 手動掃全文                    |
@@ -236,7 +236,7 @@ https://taiwan.md/og/<category>/<slug>/
 │
 ├─ Step 2: 品質關卡
 │   ├─ 跑 `taiwanmd validate <slug>`
-│   ├─ 跑 `detect-ai-hollow.sh`
+│   ├─ 跑 `quality-scan.sh`
 │   ├─ 檢查 frontmatter lastVerified
 │   ├─ 合格 → Step 3
 │   └─ 不合格 → rewrite-pipeline → 回到 Step 2

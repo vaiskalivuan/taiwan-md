@@ -157,7 +157,7 @@ export const aboutUI = {
       'EDITORIAL.md — Writing standards inherited by every new article',
     'about.organism.immune.label': 'Immune System',
     'about.organism.immune.desc':
-      'detect-ai-hollow.sh — Automatically detects hollow content',
+      'quality-scan.sh — Automatically detects hollow content',
     'about.organism.metabolism.label': 'Metabolism',
     'about.organism.metabolism.desc':
       'Quality Cron — Automatically rewrites low-quality articles every hour',
@@ -484,7 +484,7 @@ export const aboutUI = {
     'about.organism.dna.label': 'DNA',
     'about.organism.dna.desc': 'EDITORIAL.md — 寫作標準會遺傳給每一篇新文章',
     'about.organism.immune.label': '免疫系統',
-    'about.organism.immune.desc': 'detect-ai-hollow.sh — 自動偵測空洞內容',
+    'about.organism.immune.desc': 'quality-scan.sh — 自動偵測空洞內容',
     'about.organism.metabolism.label': '代謝',
     'about.organism.metabolism.desc': '品質 Cron — 每小時自動重寫低品質文章',
     'about.organism.perception.label': '感知',

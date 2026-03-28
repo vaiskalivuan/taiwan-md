@@ -89,7 +89,7 @@
 bash scripts/sync.sh
 
 # 1. 空洞分數檢測（必須 ≤ 3）
-bash tools/detect-ai-hollow.sh --json 2>&1 | \
+bash tools/quality-scan.sh --json 2>&1 | \
   python3 -c "import json,sys; d=json.load(sys.stdin); \
   matches=[f for f in d['files'] if '[文章名關鍵字]' in f['file']]; \
   print(f'Score: {matches[0][\"score\"]}') if matches else print('Score: 0 (PASS)')"

@@ -347,7 +347,7 @@ export const contributeUI = {
       '<strong>Wikipedia tone:</strong> Sounds like an encyclopedia entry, not human curation',
     'contribute.guides.quality.script': '🤖 Automated Check',
     'contribute.guides.quality.script.desc':
-      'Our detect-ai-hollow.sh script automatically flags articles with scores >3. Aim for ≤3 for auto-acceptance.',
+      'Our quality-scan.sh script automatically flags articles with scores >3. Aim for ≤3 for auto-acceptance.',
 
     // Paths Section
     'contribute.paths.title': 'Choose your way',
@@ -875,7 +875,7 @@ export const contributeUI = {
       '<strong>維基百科語氣：</strong>聽起來像百科條目，不是人類策展',
     'contribute.guides.quality.script': '🤖 自動化檢查',
     'contribute.guides.quality.script.desc':
-      '我們的 detect-ai-hollow.sh 腳本會自動標記分數>3的文章。目標≤3分可自動通過。',
+      '我們的 quality-scan.sh 腳本會自動標記分數>3的文章。目標≤3分可自動通過。',
 
     // Paths Section
     'contribute.paths.title': '選擇你的方式',

@@ -138,7 +138,7 @@ Stage 3: VERIFY（驗證）───→ commit + push
 1. **五指檢測**（手動 60 秒）
 2. **結構驗證**（逐項打勾）
 3. **塑膠掃描**（手動 90 秒，重點掃後半段）
-4. **自動驗證**（detect-ai-hollow ≤ 3 + build）
+4. **自動驗證**（quality-scan ≤ 3 + build）
 5. **Commit**（全部通過才執行）
 
 **⚠️ 不合格 = 不 commit。修正後從 QUALITY-CHECKLIST.md 重新驗證。**

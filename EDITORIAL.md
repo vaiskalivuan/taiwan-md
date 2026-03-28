@@ -588,7 +588,7 @@ AI 會把被禁的句式「微調」成看似不同但本質一樣的句子：
 [ ] 文章有提到挑戰、爭議或限制嗎？（不是只寫好的）
 [ ] 挑戰是編織在故事裡的，還是補丁式加在最後？
 [ ] lastHumanReview 設定正確嗎？
-[ ] 跑過 detect-ai-hollow.sh 分數 ≤ 3 嗎？
+[ ] 跑過 quality-scan.sh 分數 ≤ 3 嗎？
 [ ] 文章第一個名字是一個具體的人嗎？（不是機構或概念）（v4）
 [ ] 至少有 2 句從公開來源挖來的真人引語嗎？（v4）
 [ ] 每個轉折有具體的因果鏈嗎？（誰→因為什麼→導致什麼）（v4）
@@ -645,9 +645,9 @@ Taiwan.md 大量使用 AI 輔助寫作，但 AI 是工具，不是作者。
 6. **塑膠會變種**。AI 把被禁的句式微調成看似不同的版本（見上方變種偵測）。人工清洗不可省
 7. **Build 驗證不能省**。Sub-agent 的 YAML frontmatter 偶爾會壞掉，一篇壞 = 整個 category 炸
 
-### detect-ai-hollow.sh 偵測指標
+### quality-scan.sh 偵測指標
 
-腳本位於 `tools/detect-ai-hollow.sh`，7 個偵測指標：
+腳本位於 `tools/quality-scan.sh`，7 個偵測指標：
 
 1. Bullet 密度 >30%
 2. 具體年份 <2 個

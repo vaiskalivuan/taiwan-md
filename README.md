@@ -147,7 +147,7 @@ We maintain an **[EDITORIAL.md](./EDITORIAL.md)** — our writing methodology an
 - **Research workflow**: define questions → cross-reference 2+ sources → verify data
 - **Article structure**: 30-sec overview → narrative-driven body → challenges → references
 - **Tone**: specific over vague, stories over bullet lists, honesty over cheerleading
-- **AI quality control**: `tools/detect-ai-hollow.sh` scans all articles for hollow AI patterns (empty modifiers, missing sources, bullet-list padding)
+- **AI quality control**: `tools/quality-scan.sh` scans all articles for hollow AI patterns (empty modifiers, missing sources, bullet-list padding)
 - **Checklist**: 10-point quality gate before every publish
 
 ---
@@ -218,9 +218,9 @@ The organism has an automated immune system that detects and fights "hollow AI c
 
 | Tool                                                        | Function                                                                                                                                                                 |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tools/detect-ai-hollow.sh`                                 | Scans all articles for 7 hollow-content indicators: bullet padding, missing dates, no sources, empty modifiers, repetitive structure, thin paragraphs, no human review   |
-| `tools/detect-ai-hollow.sh --diff`                          | Compares against baseline to show which articles improved or degraded since last scan                                                                                    |
-| `tools/detect-ai-hollow.sh --fix`                           | Auto-suggests fixes for flagged articles                                                                                                                                 |
+| `tools/quality-scan.sh`                                     | Scans all articles for 7 hollow-content indicators: bullet padding, missing dates, no sources, empty modifiers, repetitive structure, thin paragraphs, no human review   |
+| `tools/quality-scan.sh --diff`                              | Compares against baseline to show which articles improved or degraded since last scan                                                                                    |
+| `tools/quality-scan.sh --fix`                               | Auto-suggests fixes for flagged articles                                                                                                                                 |
 | [EDITORIAL.md §塑膠偵測](./EDITORIAL.md)                    | Human-readable guide to detecting "plastic" writing — five species of hollow sentences that AI loves to generate                                                         |
 | [REWRITE-PIPELINE.md](./docs/editorial/REWRITE-PIPELINE.md) | Four-file orchestration pipeline that prevents quality collapse: Pipeline (flow) → RESEARCH-TEMPLATE (research) → EDITORIAL (writing) → QUALITY-CHECKLIST (verification) |
 
@@ -238,7 +238,7 @@ New knowledge discovered
        │     → 五種開場、因果鏈、塑膠偵測、結尾模式庫
        │
        └─ Stage 3: docs/editorial/QUALITY-CHECKLIST.md (verification)
-             → 五指檢測 → 結構驗證 → 塑膠掃描 → detect-ai-hollow.sh
+             → 五指檢測 → 結構驗證 → 塑膠掃描 → quality-scan.sh
                     ↓
               docs/community/REVIEWERS.md (human review)
                     ↓

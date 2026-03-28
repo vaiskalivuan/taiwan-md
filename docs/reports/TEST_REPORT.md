@@ -7,7 +7,7 @@
 - ✅ 四層檢查邏輯實作完成
 - ✅ Layer 0: 安全隔離（白名單路徑檢查）
 - ✅ Layer 1: 格式驗證（frontmatter + conflict markers + 簡中檢查）
-- ✅ Layer 2: 品質閘門（基本品質指標，detect-ai-hollow.sh 暫時 mock）
+- ✅ Layer 2: 品質閘門（基本品質指標，quality-scan.sh 暫時 mock）
 - ✅ Layer 3: EDITORIAL 軟審（不 block，只警告）
 - ✅ 彩色輸出與格式化報告
 - ✅ 正確的 exit code（PASS=0, FAIL=1）
@@ -61,7 +61,7 @@ python3 -c "import yaml; yaml.safe_load(open('.github/workflows/pr-review.yml'))
 
 ## ⚠️ 已知限制
 
-1. **detect-ai-hollow.sh 暫時 mock**
+1. **quality-scan.sh 暫時 mock**
    - 原因：原腳本可能會掛起
    - 現況：固定回傳分數 3（PASS）
    - TODO：需要調試原腳本或新增 timeout
@@ -86,7 +86,7 @@ python3 -c "import yaml; yaml.safe_load(open('.github/workflows/pr-review.yml'))
 
 1. **立即可用**：scripts/review-pr.sh 已可用於本地測試
 2. **GitHub Action**：需要實際 PR 才能完整測試，建議小量測試後正式啟用
-3. **后续優化**：修正 detect-ai-hollow.sh 整合，提升中文字數統計精度
+3. **后续優化**：修正 quality-scan.sh 整合，提升中文字數統計精度
 
 ## 📁 產出檔案
 

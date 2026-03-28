@@ -11,7 +11,7 @@
 #   2. 寫入 knowledge/{Category}/{主題}.md（中文 SSOT）
 #   3. 執行 sync.sh（knowledge/ → src/content/）
 #   4. 執行 build 驗證
-#   5. 執行 detect-ai-hollow.sh 品質檢測
+#   5. 執行 quality-scan.sh 品質檢測
 #   6. git commit & push
 #
 # 📋 使用方式（給 AI agent 的 prompt 範本）：
@@ -24,7 +24,7 @@
 #   Step 2: 寫入 knowledge/{Category}/{主題}.md
 #   Step 3: bash scripts/core/sync.sh
 #   Step 4: npm run build（驗證 frontmatter）
-#   Step 5: bash tools/detect-ai-hollow.sh（分數 ≤ 3）
+#   Step 5: bash tools/quality-scan.sh（分數 ≤ 3）
 #   Step 6: git add -A && git commit && git push
 #
 # ⚠️ 重要原則：
@@ -54,7 +54,7 @@ if [ -z "$TOPIC" ]; then
   echo "  2. 寫入 knowledge/{Category}/{主題}.md（SSOT）"
   echo "  3. sync.sh（knowledge/ → src/content/）"
   echo "  4. npm run build（驗證）"
-  echo "  5. detect-ai-hollow.sh（品質 ≤ 3）"
+  echo "  5. quality-scan.sh（品質 ≤ 3）"
   echo "  6. git commit & push"
   echo ""
   echo "⚠️ SSOT 架構："
@@ -98,11 +98,11 @@ echo "🔍 Step 5/6: 品質檢測..."
 if [ -n "$CATEGORY" ]; then
   FILE_PATH="knowledge/$CATEGORY/$TOPIC.md"
   if [ -f "$FILE_PATH" ]; then
-    SCORE=$(bash tools/detect-ai-hollow.sh 2>/dev/null | grep "$TOPIC" | head -1 || echo "")
+    SCORE=$(bash tools/quality-scan.sh 2>/dev/null | grep "$TOPIC" | head -1 || echo "")
     if [ -n "$SCORE" ]; then
       echo "  📊 $SCORE"
     else
-      echo "  ℹ️  detect-ai-hollow.sh 未找到匹配（可能已通過）"
+      echo "  ℹ️  quality-scan.sh 未找到匹配（可能已通過）"
     fi
   fi
 fi
