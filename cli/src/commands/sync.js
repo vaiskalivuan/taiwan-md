@@ -1,6 +1,13 @@
 import chalk from 'chalk';
 import { execSync } from 'child_process';
-import { existsSync, mkdirSync, readdirSync, copyFileSync, statSync } from 'fs';
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  copyFileSync,
+  writeFileSync,
+  statSync,
+} from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 
@@ -94,28 +101,37 @@ export async function runSync(opts = {}) {
     );
 
     if (!opts.silent) console.log(chalk.gray('  設定 sparse-checkout...'));
-    run(`git -C "${KNOWLEDGE_DIR}" sparse-checkout set knowledge public/api`, {
+    run(`git -C "${KNOWLEDGE_DIR}" sparse-checkout set knowledge`, {
       silent: true,
     });
 
     if (!opts.silent) console.log(chalk.green('  ✓ 克隆完成'));
   }
 
-  // Copy search index to cache
+  // Download API JSON files to cache (these are build-time generated, not in git)
   mkdirSync(CACHE_DIR, { recursive: true });
 
-  const searchIndexSrc = join(
-    KNOWLEDGE_DIR,
-    'public',
-    'api',
+  const API_BASE = 'https://taiwan.md/api';
+  const API_FILES = [
+    'dashboard-articles.json',
+    'dashboard-vitals.json',
+    'dashboard-organism.json',
+    'dashboard-translations.json',
     'search-minisearch.json',
-  );
-  const searchIndexDst = join(CACHE_DIR, 'search-minisearch.json');
+  ];
 
-  if (existsSync(searchIndexSrc)) {
-    copyFileSync(searchIndexSrc, searchIndexDst);
-    if (!opts.silent) console.log(chalk.gray('  ✓ 搜尋索引已快取'));
+  for (const file of API_FILES) {
+    try {
+      const res = await fetch(`${API_BASE}/${file}`);
+      if (res.ok) {
+        const data = await res.text();
+        writeFileSync(join(CACHE_DIR, file), data);
+      }
+    } catch {
+      // Non-critical — some API files may not exist yet
+    }
   }
+  if (!opts.silent) console.log(chalk.gray('  ✓ API 資料已快取'));
 
   // Print summary
   const knowledgeDir = join(KNOWLEDGE_DIR, 'knowledge');
