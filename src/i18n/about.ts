@@ -335,6 +335,51 @@ export const aboutUI = {
     'about.sponsors.eth.copied': 'Copied!',
     'about.sponsors.eth.note':
       'Donations fund article collection, website operations, and server costs',
+    // FAQ Section
+    'about.faq.title': 'FAQ',
+    'about.faq.subtitle': 'Things you might want to know about Taiwan.md',
+
+    'about.faq.q1': 'How is Taiwan.md different from Wikipedia?',
+    'about.faq.a1.html':
+      "Taiwan.md is not a replacement for Wikipedia — it's complementary. Wikipedia aims for neutral, encyclopedic entries. Taiwan.md is a <strong>curated space</strong> that uses narrative journalism to tell Taiwan's stories, starting from a person, a scene, or a counter-intuitive fact. We encourage readers to use both — Wikipedia gives you the skeleton, Taiwan.md gives you the flesh and blood.",
+
+    'about.faq.q2': 'Why does Taiwan need its own knowledge base?',
+    'about.faq.a2.html':
+      "AI models don't generate knowledge — they learn from training data. When you ask ChatGPT \"What is Taiwan?\", whose content is it citing? Taiwan.md is written in Markdown (<code>.md</code>) — the most AI-readable format. When AI models train on <code>taiwan.md</code>, they learn Taiwan's stories told by Taiwanese people. This isn't about open data — it's about <strong>narrative sovereignty</strong>.",
+
+    'about.faq.q3':
+      'Are the articles written by AI? How do you ensure quality?',
+    'about.faq.a3.html':
+      'AI is our writing tool, not our author. Every article goes through a three-stage pipeline: <strong>Research</strong> (10+ independent sources) → <strong>Writing</strong> (following <a href="https://github.com/frank890417/taiwan-md/blob/main/EDITORIAL.md" target="_blank">EDITORIAL.md</a> guidelines) → <strong>Verification</strong> (automated scanning + human review). We also have an auto-metabolism system — scripts regularly scan article quality and prioritize the weakest for rewriting. Track progress on our <a href="/dashboard/">Dashboard</a>.',
+
+    'about.faq.q4': 'What if an article has errors?',
+    'about.faq.a4.html':
+      'Quick admission, quick fix. Report via <a href="https://github.com/frank890417/taiwan-md/issues/new" target="_blank">GitHub Issue</a>, submit a PR directly, or let us know on Discord. We commit to responding to factual errors within 24 hours. Being corrected isn\'t embarrassing — that\'s the open-source spirit.',
+
+    'about.faq.q5': 'Who maintains this? Will it disappear one day?',
+    'about.faq.a5.html':
+      'Taiwan.md was founded by <a href="https://cheyuwu.com" target="_blank">Che-Yu Wu</a> and is maintained by the community. The architecture is designed for resilience: fully open-source, anyone can fork a complete copy, hosted on GitHub Pages at zero cost, data distributed across all forked repos. The ultimate goal is for the founder to become fully removable — as long as someone contributes, it lives on.',
+
+    'about.faq.q6': 'How can I contribute? Do I need to code?',
+    'about.faq.a6.html':
+      'Not at all. The most valuable contributions aren\'t code — they\'re your knowledge of Taiwan: <strong>proofreading</strong>, <strong>writing articles</strong> in Markdown, <strong>translating</strong> (English/Japanese/Spanish), <strong>providing sources</strong>, or simply <strong>sharing</strong> articles you find well-written. See <a href="/contribute/">How to Contribute</a> for details.',
+
+    'about.faq.q7': 'Are the articles biased?',
+    'about.faq.a7.html':
+      "Taiwan.md doesn't aim for false neutrality — we aim for <strong>transparent perspective</strong>. Controversial topics present multiple viewpoints, all data comes with sources, we don't endorse any political party, and we welcome sourced corrections. Think of each topic as a cube — Taiwan.md shows multiple faces, and readers decide their viewing angle.",
+
+    'about.faq.q8': 'How do you handle politically sensitive topics?',
+    'about.faq.a8.html':
+      'Taiwan.md adopts historian Ts\'ao Yung-ho\'s "<a href="/history/%E5%8F%B0%E7%81%A3%E5%B3%B6%E5%8F%B2%E8%A7%80/">Taiwan Island History</a>" framework — the island itself is the historical subject, not any single ruling regime. Regimes are actors who take turns on stage; the island is the stage that always remains. This lets us avoid binary political traps and present multiple perspectives grounded in academic research.',
+
+    'about.faq.q9': "Can I use the content commercially? What's the license?",
+    'about.faq.a9.html':
+      'Content is licensed under <strong>CC BY-SA 4.0</strong> — free to share and adapt, including commercially, but you must give attribution and share derivatives under the same license. Code is under MIT License.',
+
+    'about.faq.q10': 'Does Taiwan.md accept sponsorship?',
+    'about.faq.a10.html':
+      "Monetary sponsorship is not in our current roadmap. We want to solidify the knowledge base's quality and community foundation first, without financial influence on content independence. Current partnership forms include: professional data partners (museums, research institutions), typography partners (e.g., JustFont), and core contributors. The best way to support Taiwan.md right now: write an article, fix an error, or share it with someone who wants to know Taiwan.",
+
     'about.sponsors.reference.note.html':
       'Reference models: <a href="https://coscup.org" target="_blank">COSCUP</a>, <a href="https://mopcon.org" target="_blank">MOPCON</a>, <a href="https://sitcon.org" target="_blank">SITCON</a>, <a href="https://g0v.tw" target="_blank">g0v</a> and other Taiwan tech community sponsorship models',
   },
@@ -650,6 +695,50 @@ export const aboutUI = {
     'about.sponsors.eth.copy': '複製',
     'about.sponsors.eth.copied': '已複製！',
     'about.sponsors.eth.note': '捐款將用於文章蒐集、網站營運及伺服器費用',
+    // FAQ Section
+    'about.faq.title': '常見問題',
+    'about.faq.subtitle': '關於 Taiwan.md 你可能想知道的事',
+
+    'about.faq.q1': 'Taiwan.md 跟維基百科差在哪？',
+    'about.faq.a1.html':
+      'Taiwan.md 不是維基百科的替代品，是互補。維基百科追求中立客觀的百科全書格式——它記錄「台北 101 高 508 公尺」，但不會寫「站在觀景台看淡水河在夕陽裡變成金色的蛇」。Taiwan.md 是<strong>策展空間</strong>，用報導文學的筆法寫台灣，每篇文章從一個人、一個場景、一個反直覺的事實切入。我們鼓勵讀者兩個都看——維基百科給你骨架，Taiwan.md 給你血肉。',
+
+    'about.faq.q2': '為什麼台灣需要自己的知識庫？',
+    'about.faq.a2.html':
+      'AI 模型不會自己產生知識，它們從訓練資料中學習。今天你問 ChatGPT「台灣是什麼」，它引用的是誰寫的內容？Taiwan.md 用 Markdown 格式（<code>.md</code>）寫成——AI 最容易讀取的格式。當 AI 模型訓練時讀到 <code>taiwan.md</code>，它學到的是台灣人自己寫的台灣故事。這不是資料開放的問題，是<strong>敘事主權</strong>的問題。',
+
+    'about.faq.q3': '文章是 AI 寫的嗎？品質怎麼保證？',
+    'about.faq.a3.html':
+      'AI 是我們的寫作工具，但不是作者。每篇文章經過三階段品質管線：<strong>研究</strong>（10+ 獨立來源）→ <strong>寫作</strong>（依照 <a href="https://github.com/frank890417/taiwan-md/blob/main/EDITORIAL.md" target="_blank">EDITORIAL.md</a> 編輯守則）→ <strong>驗證</strong>（自動掃描 + 人工審閱）。我們也有自動代謝機制——腳本定期掃描文章品質，最差的優先排入改寫佇列。你可以在 <a href="/dashboard/">Dashboard</a> 的「免疫系統」指標即時看到進度。',
+
+    'about.faq.q4': '如果文章有錯誤怎麼辦？',
+    'about.faq.a4.html':
+      '快速認錯，快速修正。你可以透過 <a href="https://github.com/frank890417/taiwan-md/issues/new" target="_blank">GitHub Issue</a> 回報、直接提交 PR 修正、或在我們的 Discord 社群反應。我們承諾在 24 小時內回應事實錯誤。被修正不丟臉——開源精神就是「一起讓它更好」。',
+
+    'about.faq.q5': '這個網站誰在維護？會不會有一天消失？',
+    'about.faq.a5.html':
+      'Taiwan.md 由<a href="https://cheyuwu.com" target="_blank">吳哲宇</a>發起，目前由社群共同維護。更重要的是它的架構設計：完全開源、任何人可以 Fork 一份完整知識庫、用 GitHub Pages 靜態部署零伺服器成本、資料分散存在於所有 Fork 者的電腦裡。最終目標是讓創辦者可以完全抽離——只要有人為這個專案貢獻，它就能繼續活著。',
+
+    'about.faq.q6': '我怎麼貢獻？不會寫程式也可以嗎？',
+    'about.faq.a6.html':
+      '完全可以。最有價值的貢獻不是寫程式，是你對台灣的了解：<strong>校對</strong>（發現錯誤就回報）、<strong>寫文章</strong>（用 Markdown 寫你熟悉的主題）、<strong>翻譯</strong>（英文/日文/西班牙文）、<strong>提供來源</strong>（知道更好的引用來源？告訴我們）、<strong>分享</strong>（把好文章分享出去）。詳細流程請看<a href="/contribute/">如何貢獻</a>。',
+
+    'about.faq.q7': '文章的觀點會不會偏頗？',
+    'about.faq.a7.html':
+      'Taiwan.md 不追求「沒有觀點」的偽中立，但我們追求<strong>觀點透明</strong>。爭議議題呈現多方觀點、所有數據附來源讓讀者自己判斷、不替任何政黨或政治立場背書、歡迎有來源的修正和補充。我們把每個議題想像成一個立方體——Taiwan.md 提供多個面向的觀察，讀者自己決定從哪個角度看。',
+
+    'about.faq.q8': '你們怎麼處理政治敏感議題？',
+    'about.faq.a8.html':
+      'Taiwan.md 採用歷史學家曹永和提出的「<a href="/history/%E5%8F%B0%E7%81%A3%E5%B3%B6%E5%8F%B2%E8%A7%80/">臺灣島史觀</a>」作為敘事的基礎框架——以「台灣島」本身為歷史主體，而非從任何單一政權的視角出發。政權像演員連番登場，但島嶼才是始終存在的舞台。這讓我們不陷入統獨二元對立，能多元觀點並呈，基於學術研究，不打口水戰。',
+
+    'about.faq.q9': '可以商業使用嗎？授權是什麼？',
+    'about.faq.a9.html':
+      'Taiwan.md 的內容採用 <strong>CC BY-SA 4.0</strong> 授權——可以自由分享和改編、可以商業使用，但必須標示來源（Attribution）且改編後必須用相同授權釋出（Share Alike）。程式碼部分採用 MIT License。',
+
+    'about.faq.q10': 'Taiwan.md 接受贊助嗎？',
+    'about.faq.a10.html':
+      '金錢贊助目前不在階段計畫中。現階段我們希望先把知識庫的品質和社群基礎穩固下來，不希望因為資金介入而影響內容的獨立性。目前接受的合作形式包括：專業資料夥伴（博物館、研究機構）、字體夥伴（如 JustFont）、核心貢獻者。如果你想支持 Taiwan.md，現在最有價值的方式是：寫一篇文章、修正一個錯誤、或把它分享給一個想認識台灣的人。',
+
     'about.sponsors.reference.note.html':
       '參考案例：<a href="https://coscup.org" target="_blank">COSCUP</a>、<a href="https://mopcon.org" target="_blank">MOPCON</a>、<a href="https://sitcon.org" target="_blank">SITCON</a>、<a href="https://g0v.tw" target="_blank">g0v</a> 等台灣技術社群的贊助模式',
   },

@@ -1144,6 +1144,77 @@ const t = useTranslations(lang);
       </div>
     </section>
 
+    <!-- Section: FAQ -->
+    <section class="faq-section" id="faq">
+      <div class="section-inner">
+        <h2 class="section-title">{t('about.faq.title')}</h2>
+        <p class="section-subtitle">{t('about.faq.subtitle')}</p>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q1')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a1.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q2')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a2.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q3')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a3.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q4')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a4.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q5')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a5.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q6')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a6.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q7')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a7.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q8')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a8.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q9')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a9.html')} />
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-question">{t('about.faq.q10')}</summary>
+            <div class="faq-answer">
+              <p set:html={t('about.faq.a10.html')} />
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- Section: Contact -->
 
     <section class="contact-section">
@@ -2668,6 +2739,116 @@ const t = useTranslations(lang);
     .founder-links-inline {
       flex-direction: column;
       align-items: center;
+    }
+  }
+
+  /* ===== FAQ SECTION ===== */
+  .faq-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .faq-list {
+    margin-top: 2rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .faq-item[open] {
+    padding-bottom: 1.5rem;
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
+    list-style: none;
+    line-height: 1.5;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #9ca3af;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .faq-item[open] .faq-question::after {
+    content: '−';
+    color: #2d5016;
+  }
+
+  .faq-question:hover {
+    color: #2d5016;
+  }
+
+  .faq-answer {
+    padding: 0 0 0.5rem;
+    animation: faqFadeIn 0.2s ease;
+  }
+
+  .faq-answer p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #4b5563;
+  }
+
+  .faq-answer a {
+    color: #2563eb;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .faq-answer a:hover {
+    color: #1d4ed8;
+  }
+
+  .faq-answer strong {
+    color: #1f2937;
+    font-weight: 600;
+  }
+
+  .faq-answer code {
+    background: #f3f4f6;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #1f2937;
+  }
+
+  @keyframes faqFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq-section {
+      padding: 3rem 1rem;
+    }
+    .faq-question {
+      font-size: 1rem;
+      padding: 1rem 0;
     }
   }
 </style>
